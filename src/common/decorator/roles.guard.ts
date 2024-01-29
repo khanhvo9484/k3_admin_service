@@ -1,3 +1,4 @@
+import { JwtPayloadDto } from './../../shared/jwt.payload';
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { Role } from './role.enum';
@@ -23,6 +24,7 @@ export class RolesGuard implements CanActivate {
       // If user.role is a string, convert it to an array for consistency
       user.role = [user.role];
     }
+
     return requiredRoles.some((role) => user.role?.includes(role));
   }
 }

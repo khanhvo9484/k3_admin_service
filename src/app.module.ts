@@ -20,6 +20,8 @@ import {
 } from './enviroment';
 import { CustomJWTModule } from 'utils/jwt-helper/custom-jwt.module';
 import { ExcelModule } from 'utils/excel/excel.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from '@common/guard/auth.guard';
 
 @Module({
   imports: [
@@ -62,6 +64,11 @@ import { ExcelModule } from 'utils/excel/excel.module';
     AdminModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+  ],
 })
 export class AppModule {}
